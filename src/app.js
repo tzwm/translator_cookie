@@ -7,6 +7,31 @@ let marseCode = require('json!./morse-code.json')
 
 let content = document.getElementById('content');
 
+const contentStyle = {
+  display: "flex",
+  padding: "10rem",
+  justifyContent: "center",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  alignContent: "center"
+}
+
+const itemStyle = {
+  flex: "0 1 100%"
+}
+
+const orangeStyle = {
+  marginRight: "0.4rem",
+  color: "orange",
+  fontSize: "1.4rem"
+}
+
+const greenStyle = {
+  marginRight: "0.4rem",
+  color: "limegreen",
+  fontSize: "1.4rem"
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -19,13 +44,16 @@ class App extends React.Component {
     let targetText = this.state.targetText
 
     return (
-      <div>
+      <div style={contentStyle}>
+        <h2 style={itemStyle}>Hi Cookie, here is the translator for you.</h2>
+
         <TextField multiLine={true}
                    floatingLabelText="You could input cookie"
+                   style={itemStyle}
                    value={sourceText}
                    onChange={this._onSourceChange.bind(this)} />
 
-        <p>{ targetText }</p>
+        <p style={itemStyle}>{ targetText }</p>
       </div>
     )
   }
@@ -37,12 +65,13 @@ class App extends React.Component {
   }
 
   _translate(source) {
-    let ret = ''
+    let ret = []
 
     for (let i = 0; i < source.length; i++) {
       let v = marseCode[source[i]]
       if (v) {
-        ret += v + ' '
+        let style = i % 2 === 0 ? orangeStyle : greenStyle
+        ret.push(<span style={style}>{v}</span>)
       }
     }
 
