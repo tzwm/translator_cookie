@@ -31,7 +31,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [ '', '.js' ],
+    extensions: [ '', '.js', '.json' ],
     modulesDirectories: [ 'node_modules' ]
   },
   module: {
@@ -39,6 +39,9 @@ module.exports = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'react-hot!babel-loader'
+    }, {
+      test: /\.json&/,
+      loader: "json"
     } ]
   },
 
